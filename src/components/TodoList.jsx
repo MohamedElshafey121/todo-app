@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { removeToDoItem, resetAddUpdateTodo, sortTodoList } from '../store/todos'
 import { useDispatch, useSelector } from 'react-redux'
 import ToDo from './ToDo'
+import { Link } from 'react-router-dom'
 
 function TodoList () {
 
@@ -35,6 +36,13 @@ function TodoList () {
                 >
                     <div className='ps-content'>
                         <ul className=' list-group list-group-flush'>
+                            {(todos&&todos.length===0) && (
+                                <p className='text-center' style={{ marginTop: '100px' }}>
+                                    There is no tasks yet
+                                    <Link to='/add'> click here </Link>
+                                     to add new one
+                                </p>
+                            )}
                             {todos && todos.map( ( todo, todoIdx ) => (
                                 <ToDo todo={todo} key={todoIdx} todoIdx={todoIdx} removeTodo={removeToDoHandler} />
                             ) )}
